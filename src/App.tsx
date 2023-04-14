@@ -1,9 +1,9 @@
 import "./App.css";
 import { Color } from "./models/color";
-import { ColorChip } from "./components/atoms/colorChip";
+import { ColorChip } from "./components/atoms/ColorChip/ColorChip";
 
 function App() {
-  const color: Color = Color.Green;
+  const color: Color = Color.Blue;
 
   return (
     <div className="App flex flex-col items-center justify-center">

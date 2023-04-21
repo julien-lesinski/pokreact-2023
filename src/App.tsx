@@ -1,33 +1,26 @@
 import "./App.css";
-import { Color } from "./models/color";
-import { ColorChip } from "./components/atoms/ColorChip/ColorChip";
+import { Pokemon, PokemonClient } from "pokenode-ts";
+import { useState } from "react";
+import { PokemonCard } from "./components/atoms/PokemonCard";
 
-function App() {
-  const colors = drawSeveralRandomColors(5);
+export default function App() {
+  const [pokemon, setPokemon] = useState<Pokemon | undefined>();
 
   return (
     <div className="App flex flex-col items-center justify-center">
-      <div className="max-w-5xl flex items-start text-left gap-4">
-        {colors.map((color, index) => (
-          <ColorChip key={index} color={color} />
-        ))}
+      <div className="max-w-5xl flex flex-col items-center gap-4">
+        {pokemon && <PokemonCard pokemon={pokemon} />}
+        <button
+          className="border border-white rounded px-2 hover:bg-white/20 transition-colors"
+          onClick={() =>
+            new PokemonClient()
+              .getPokemonById(Math.floor(Math.random() * 1010))
+              .then(setPokemon)
+          }
+        >
+          Another one!
+        </button>
       </div>
     </div>
   );
 }
-
-function drawRandomColor(): Color {
-  const colors: Color[] = [Color.Red, Color.Green, Color.Blue];
-  const index = Math.floor(Math.random() * colors.length);
-  return colors[index];
-}
-
-function drawSeveralRandomColors(count: number): Color[] {
-  const colors: Color[] = [];
-  for (let i = 0; i < count; ++i) {
-    colors.push(drawRandomColor());
-  }
-  return colors;
-}
-
-export default App;

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Pokemon, PokemonClient } from "pokenode-ts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PokemonCard } from "./components/atoms/PokemonCard";
 import { PokemonIdInput } from "./components/atoms/PokemonIdInput";
 import { Button } from "./components/atoms/Button";
@@ -8,6 +8,12 @@ import { Button } from "./components/atoms/Button";
 export default function App() {
   const [randomPokemon, setRandomPokemon] = useState<Pokemon | undefined>();
   const [chosenPokemon, setChosenPokemon] = useState<Pokemon | undefined>();
+
+  useEffect(() => {
+    new PokemonClient()
+      .getPokemonById(getRandomPokemonId())
+      .then(setRandomPokemon);
+  }, []);
 
   return (
     <div className="App flex flex-col items-center justify-center">
@@ -18,7 +24,7 @@ export default function App() {
             <Button
               onClick={() =>
                 new PokemonClient()
-                  .getPokemonById(Math.floor(Math.random() * 1010))
+                  .getPokemonById(getRandomPokemonId())
                   .then(setRandomPokemon)
               }
             >
@@ -37,4 +43,8 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+function getRandomPokemonId(): number {
+  return Math.floor(Math.random() * 1010);
 }

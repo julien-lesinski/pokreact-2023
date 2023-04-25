@@ -1,4 +1,3 @@
-import { MainClient } from "pokenode-ts";
 import { Ability } from "pokenode-ts";
 import { PokemonClient } from "pokenode-ts";
 import { Pokemon } from "pokenode-ts";

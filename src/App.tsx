@@ -5,8 +5,10 @@ import { PokemonCard } from "./components/atoms/PokemonCard";
 import { PokemonIdInput } from "./components/atoms/PokemonIdInput";
 import { RandomPokemon } from "./components/molecules/RandomPokemon";
 import { RandomColorText } from "./components/atoms/RandomColorText";
+import { useTitle } from "./hooks/useTitle";
 
 export default function App() {
+  useTitle("PokéReact");
   const [chosenPokemon, setChosenPokemon] = useState<Pokemon | undefined>();
 
   return (

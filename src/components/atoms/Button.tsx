@@ -11,7 +11,7 @@ export function Button(
   return (
     <button
       className={
-        "border border-white rounded px-2 hover:bg-white/20 transition-colors " +
+        "border rounded px-2 bg-transparent dark:hover:bg-white/20 hover:bg-black/20 transition-colors" +
           className ?? ""
       }
       {...otherProps}

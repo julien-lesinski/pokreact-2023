@@ -36,7 +36,7 @@ export function PokemonCard(props: PokemonCardProps) {
           {abilitiesDetails?.map((ability) => (
             <div
               key={ability.id}
-              className="bg-gradient-to-r from-indigo-900 to-slate-800 rounded px-1 cursor-help select-none"
+              className="bg-gradient-to-r dark:from-red-900 dark:to-gray-800 from-gray-100 to-red-400 rounded px-1 cursor-help select-none"
               title={
                 ability.effect_entries.find(
                   (entry) => entry.language.name === "en"

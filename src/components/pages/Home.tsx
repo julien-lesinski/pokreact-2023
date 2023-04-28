@@ -1,10 +1,8 @@
 import { Pokemon, PokemonClient } from "pokenode-ts";
 import { PokemonCard } from "../atoms/PokemonCard";
 import { PokemonIdInput } from "../atoms/PokemonIdInput";
-import { RandomColorText } from "../atoms/RandomColorText";
 import { RandomPokemon } from "../molecules/RandomPokemon";
-import { Suspense, useState } from "react";
-import React from "react";
+import { useState } from "react";
 
 export function Home() {
   const [chosenPokemon, setChosenPokemon] = useState<Pokemon | undefined>();

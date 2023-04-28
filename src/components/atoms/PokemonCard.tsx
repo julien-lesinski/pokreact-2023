@@ -2,12 +2,19 @@ import { Ability } from "pokenode-ts";
 import { PokemonClient } from "pokenode-ts";
 import { Pokemon } from "pokenode-ts";
 import { useEffect, useState } from "react";
+import { usePokemonTeamStore } from "../../stores/usePokemonTeamStore";
+import { Button } from "./Button";
+import { PokeBallIcon } from "./PokeballIcon";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
 }
 
 export function PokemonCard(props: PokemonCardProps) {
+  const [addPokemon, pokemonIsPartOfTeam, teamIsFull] = usePokemonTeamStore(
+    (state) => [state.addPokemon, state.pokemonIsPartOfTeam, state.teamIsFull]
+  );
+
   const { pokemon } = props;
   const [abilitiesDetails, setAbilitiesDetails] = useState<
     Ability[] | undefined
@@ -19,9 +26,19 @@ export function PokemonCard(props: PokemonCardProps) {
 
   return (
     <div className="flex flex-col rounded border items-center">
-      <div className="flex items-center gap-2 pr-2 self-stretch">
+      <div className="flex items-center gap-2 pr-1 self-stretch">
         <p className="border-r border-b rounded-br p-1">#{pokemon.id}</p>
         <p className="uppercase font-bold">{pokemon.name}</p>
+        <div className="grow"></div>
+        {pokemonIsPartOfTeam(pokemon) ? (
+          <div className="pr-1">
+            <PokeBallIcon />
+          </div>
+        ) : (
+          !teamIsFull() && (
+            <Button onClick={() => addPokemon(props.pokemon)}>+</Button>
+          )
+        )}
       </div>
 
       <div className="flex gap-4 p-4">
